@@ -30,8 +30,8 @@ class ViewController: NSViewController {
         let textFields = [
             "view0": makeView(0),
             "view1": makeView(1),
-            "view1": makeView(2),
-            "view1": makeView(3),
+            "view2": makeView(2),
+            "view3": makeView(3),
         ]
         
         //Loop over each item
@@ -43,7 +43,7 @@ class ViewController: NSViewController {
         }
         
         // add a set of constraints that align the views vertically, one above the other
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view0]-[view1]-[view2]-[view3]|", options: [], metrics: nil, views: textFields))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view0]-[view1]-[view2]--[view3]|", options: [], metrics: nil, views: textFields))
         
     }
     
