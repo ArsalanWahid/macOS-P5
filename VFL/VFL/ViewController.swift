@@ -8,16 +8,16 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         createVFL()
     }
     
     func makeView(_ number: Int) -> NSView {
-        let vw = NSTextField(labelWithString: "View \(number)")
+        let vw = NSTextField(labelWithString: "View #\(number)")
         vw.translatesAutoresizingMaskIntoConstraints = false
         vw.alignment = .center
         vw.wantsLayer = true
@@ -25,8 +25,8 @@ class ViewController: NSViewController {
         return vw
     }
     
-    func createVFL(){
-        // set up a dictionary of string and views
+    func createVFL() {
+        //set up a dictionary of strings and views
         let textFields = [
             "view0": makeView(0),
             "view1": makeView(1),
@@ -34,25 +34,25 @@ class ViewController: NSViewController {
             "view3": makeView(3),
         ]
         
-        //Loop over each item
-        for(name, view) in textFields {
-            //add to parentview
-            view.addSubview(view)
-            // add horizontal constaints telling this views to stretch from edge to edge
+        // loop over each item
+        for (name, textField) in textFields {
+            // add it to our view
+            view.addSubview(textField)
+            
+            // add horizontal constraints saying that this view should stretch from edge to edge
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(name)]|", options: [], metrics: nil, views: textFields))
         }
         
-        // add a set of constraints that align the views vertically, one above the other
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view0]-[view1]-[view2]--[view3]|", options: [], metrics: nil, views: textFields))
-        
+        // add another set of constraints that cause the views to be aligned vertically, one above the other
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view0]-[view1]-[view2]-[view3]|", options: [], metrics: nil, views: textFields))
     }
     
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
-
-
+    
+    
 }
 
