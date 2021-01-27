@@ -40,11 +40,11 @@ class ViewController: NSViewController {
             view.addSubview(textField)
             
             // add horizontal constraints saying that this view should stretch from edge to edge
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(name)]|", options: [], metrics: nil, views: textFields))
+            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[\(name)(>=100)]-15-|", options: [], metrics: nil, views: textFields))
         }
         
         // add another set of constraints that cause the views to be aligned vertically, one above the other
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view0]-[view1]-[view2]-[view3]|", options: [], metrics: nil, views: textFields))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[view0]-[view1]-[view2]-10-[view3(>=300)]-|", options: [], metrics: nil, views: textFields))
     }
     
     override var representedObject: Any? {
