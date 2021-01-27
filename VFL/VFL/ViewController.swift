@@ -15,6 +15,7 @@ class ViewController: NSViewController {
         // Do any additional setup after loading the view.
         //        createVFL()
         //        createAnchors()
+        //        createStackView()
     }
     
     func makeView(_ number: Int) -> NSView {
@@ -77,12 +78,26 @@ class ViewController: NSViewController {
         previous.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    override var representedObject: Any? {
-        didSet {
-            // Update the view, if already loaded.
+    func createStackView() {
+        // create a stack view with four textfields
+        let stackView = NSStackView(views:[makeView(0),makeView(1),makeView(2),makeView(3),makeView(4)])
+        stackView.distribution = .fillEqually
+        stackView.orientation = .vertical
+        
+        //Set to false to set Auto Layout constraints by code
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
+        
+        for view in stackView.arrangedSubviews {
+            view.setContentHuggingPriority(NSLayoutConstraint.Priority(1), for: .horizontal)
+            view.setContentHuggingPriority(NSLayoutConstraint.Priority(1), for: .vertical)
         }
+        
+        //make the stackView sit flush against parent view using anchors
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
-    
-    
 }
 
