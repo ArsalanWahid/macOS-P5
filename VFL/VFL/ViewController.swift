@@ -13,7 +13,8 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        createVFL()
+        //        createVFL()
+        //        createAnchors()
     }
     
     func makeView(_ number: Int) -> NSView {
@@ -25,6 +26,7 @@ class ViewController: NSViewController {
         return vw
     }
     
+    //wMARK:- VFL
     func createVFL() {
         //set up a dictionary of strings and views
         let textFields = [
@@ -45,6 +47,34 @@ class ViewController: NSViewController {
         
         // add another set of constraints that cause the views to be aligned vertically, one above the other
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[view0]-[view1]-[view2]-10-[view3(>=300)]-|", options: [], metrics: nil, views: textFields))
+    }
+    
+    //MARK:- Anchors
+    func createAnchors() {
+        //create a var to track previos view added
+        var previous: NSView!
+        
+        //Make four views and put them in an array
+        let views = [makeView(0),makeView(1),makeView(2),makeView(3)]
+        
+        for vw in views {
+            //add the view to the superview
+            view.addSubview(vw)
+            
+            //set the anchors, where are the docs for anchors??
+            vw.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            vw.heightAnchor.constraint(equalToConstant: 88).isActive = true
+            vw.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            
+            // If prev view exists vertically position current view 10 pts away from it
+            if previous != nil {
+                vw.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
+            }else{
+                vw.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            }
+            previous = vw
+        }
+        previous.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     override var representedObject: Any? {
